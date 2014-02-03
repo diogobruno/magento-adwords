@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<!-- declare Diogo_Adwords module -->
+		<Diogo_Adwords>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Diogo_Adwords>
+	</modules>
+</config>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<!-- declare module's version information -->
+		<Diogo_Adwords>
+			<!-- this version will be used for database upgrades -->
+			<version>0.1.0</version>
+		</Diogo_Adwords>
+	</modules>
+	
+	<global>
+		<!-- declare model group for new module -->
+		<models>
+			<!--model group alias to be used in Mage::getModel() -->
+			<diogo_adwords>
+				<!-- base class name for the model group -->
+				<class>Diogo_Adwords_Model</class>
+				<resourceModel>diogo_adwords_mysql4</resourceModel>
+			</diogo_adwords>
+			
+			<!-- declarce your resourcemodel database table entities -->
+			<diogo_adwords_mysql4>
+				<class>Diogo_Adwords_Model_Mysql4</class>
+				<entities>
+					<!-- declare moudule entities here -->
+				</entities>
+			</diogo_adwords_mysql4>
+		</models>
+
+		<!-- declare resource setup for new module -->
+		<resources>
+			<!-- resource identifier -->
+			<diogo_adwords_setup>
+				<!-- specify that this resource is a setup resource and used for upgrade -->
+				<setup>
+					<module>Diogo_Adwords</module>
+				</setup>
+				
+				<!-- specify database connection for this resource -->
+				<connection>
+					<!-- do not create new connection, use predefined core setup connection -->
+					<use>core_setup</use>
+				</connection>
+				
+			</diogo_adwords_setup>
+			
+			<diogo_adwords_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</diogo_adwords_read>
+			
+			<diogo_adwords_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</diogo_adwords_write>
+			
+		</resources>
+		
+	</global>
+
+	<frontend>
+		<routers>
+			<diogo_adwords>
+				<use>standard</use>
+				<args>
+					<module>Diogo_Adwords</module>
+					<frontName>adwords</frontName>
+				</args>
+			</diogo_adwords>
+		</routers>
+		<layout>
+			<updates>
+				<diogo_adwords>
+					<file>diogo_adwords.xml</file>
+				</diogo_adwords>
+			</updates>
+		</layout>
+	</frontend>
+
+	<crontab>
+		<jobs>
+			<diogo_adwords>
+				<schedule><cron_expr>*/15 * * * *</cron_expr></schedule>
+				<run><model>diogo_adwords/observer::checkProductStock</model></run>
+			</diogo_adwords>
+		</jobs>
+	</crontab>	
+
+</config>
